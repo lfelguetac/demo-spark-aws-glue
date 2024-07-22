@@ -1,7 +1,7 @@
 import boto3
 
 # Crear un cliente de AWS Glue
-glue = boto3.client('glue', region_name='us-east-1')
+glue = boto3.client('glue', region_name='us-east-2')
 
 # Crear un trabajo de Glue
 response_create = glue.create_job(
