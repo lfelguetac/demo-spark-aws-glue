@@ -6,7 +6,7 @@ glue = boto3.client('glue', region_name='us-east-2')
 # Crear un trabajo de Glue
 response_create = glue.create_job(
     Name='my-glue-job',
-    Role='arn:aws:iam::123456789012:role/AWSGlueServiceRole',
+    Role='arn:aws:iam::393573696710:role/AWSGlueServiceRole',
     ExecutionProperty={
         'MaxConcurrentRuns': 1
     },

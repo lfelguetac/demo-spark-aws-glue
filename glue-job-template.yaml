@@ -4,7 +4,7 @@ Resources:
     Type: AWS::Glue::Job
     Properties:
       Name: my-glue-job
-      Role: arn:aws:iam::123456789012:role/AWSGlueServiceRole
+      Role: arn:aws:iam::393573696710:role/AWSGlueServiceRole
       Command:
         Name: glueetl
         ScriptLocation: s3://demo-0b4e7a0e5fe/scripts/demo_pyspark.py
