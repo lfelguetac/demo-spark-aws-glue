@@ -1,4 +1,4 @@
-name: Deploy to AWS
+name: Deploy AWS Glue Job
 
 on:
   push:
@@ -10,28 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Configure AWS credentials
+      - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Install AWS CLI
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y awscli
-
-      - name: Upload PySpark script to S3
-        run: |
-          aws s3 cp demo_pyspark.py s3://demo-0b4e7a0e5fe/scripts/demo_pyspark.py
-
-      - name: Deploy CloudFormation stack
+      - name: Deploy CloudFormation Stack
         run: |
           aws cloudformation deploy \
-            --template-file glue-job-template.yaml \
-            --stack-name my-glue-job-stack \
+            --template-file glue-job.yaml \
+            --stack-name GlueJobStack \
             --capabilities CAPABILITY_NAMED_IAM
+
+      - name: Start Glue Job
+        run: |
+          aws glue start-job-run \
+            --job-name MyGlueJob
