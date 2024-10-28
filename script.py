@@ -16,9 +16,8 @@ args = getResolvedOptions(sys.argv, [
     'S3_OUTPUT_PATH'
 ])
 
-# Crear un SparkContext y GlueContext
-sc = SparkContext()
-glueContext = GlueContext(sc)
+# Usar el contexto de Glue ya existente
+glueContext = GlueContext(SparkContext.getOrCreate())
 spark = glueContext.spark_session
 
 # Crear un job de Glue
