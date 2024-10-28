@@ -6,7 +6,7 @@ from awsglue.utils import getResolvedOptions
 from pyspark.context import SparkContext
 from awsglue.context import GlueContext
 from awsglue.job import Job
-from pyspark.sql.functions import col, substring, when, count
+from pyspark.sql.functions import col, substring, count, upper
 
 # Obtener los argumentos del job
 args = getResolvedOptions(sys.argv, [
@@ -32,7 +32,7 @@ df = spark.read.text(args['S3_INPUT_PATH'])
 df_with_letters = df.withColumn('first_letter', substring(col('value'), 1, 1))
 
 # Convertir a mayúsculas para asegurar que todas las letras están en el mismo formato
-df_with_letters = df_with_letters.withColumn('first_letter', col('first_letter').upper())
+df_with_letters = df_with_letters.withColumn('first_letter', upper(col('first_letter')))
 
 # Contar la frecuencia de cada letra del abecedario
 letter_counts = df_with_letters.groupBy('first_letter').agg(count('*').alias('count'))
