@@ -30,5 +30,10 @@ Resources:
         Name: "glueetl"
         ScriptLocation: "s3://demo-glue-bucket-rvl8vl/scripts/glue-script.py"
         PythonVersion: "3"
+      DefaultArguments: 
+        "--JOB_NAME": "glue-colbun"
+        "--S3_INPUT_PATH": "s3://elecciones-venezuela/RESULTADOS_2024_CSV_V1.csv"
+        "--S3_TEMP_DIR": "s3://aws-glue-assets-393573696710-us-east-2/temp_dir"
+        "--S3_OUTPUT_PATH": "s3://aws-glue-assets-393573696710-us-east-2/output"        
       GlueVersion: "3.0"
       MaxCapacity: 2
